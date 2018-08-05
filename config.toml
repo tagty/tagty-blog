@@ -1,0 +1,4 @@
+baseURL = "https://tagty-blog.firebaseapp.com/"
+languageCode = "en-us"
+title = "Tagty Blog"
+theme = "ananke"
