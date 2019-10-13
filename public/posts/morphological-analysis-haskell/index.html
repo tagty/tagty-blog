@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Tagty Blog  | Haskellで日本語形態素解析APIを使うにはどうすればよいか？</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.46" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.ab4b67a3ea25990fa8279f3b7ef08b61.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Haskellで日本語形態素解析APIを使うにはどうすればよいか？" />
+<meta property="og:description" content=" ハッカーと画家のスパムへの対策に登場したベイジアンフィルタをHaskellで書きたいと思った。スパム判定のためには形態素解析が必要である。YAHOO!が日本語形態素解析APIを公開している。Haskellで日本語形態素解析APIを使うにはどうすればよいかを調べた。
+2.日本語形態素解析APIをHaskellで利用する ベイジアンフィルタを実装するために機械学習 はじめようの第3回ベイジアンフィルタを実装してみようを参考にすることにした。この記事では、形態素解析にYAHOO!デベロッパーネットワークの日本語形態素解析を利用している。HaskellでWeb APIを利用するには、HTTPのライブラリが必要である。ライブラリにはHTTP: A library for client-side HTTPを利用した。以下に実装を示す。
+import Network.HTTP.Conduit import qualified Data.ByteString.Lazy as L appid = APIID -- 9 : 名詞, 10 : 動詞 uniq_filter = &quot;9|10&quot; sentence = &quot;庭には二羽ニワトリがいる。&quot; apiUri = &quot;https://jlp.yahooapis.jp/MAService/V1/parse?appid=&quot; &#43;&#43; appid &#43;&#43; &quot;&amp;results=ma,uniq&amp;uniq_filter=&quot; &#43;&#43; uniq_filter &#43;&#43; &quot;&amp;sentence=&quot; &#43;&#43; sentence main :: IO () main = do simpleHttp apiUri &gt;&gt;= L.putStr  以下のレスポンスを得ることができた。
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;ResultSet xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;urn:yahoo:jp:jlp&quot; xsi:schemaLocation=&quot;urn:yahoo:jp:jlp https://jlp.yahooapis.jp/MAService/V1/parseResponse.xsd&quot;&gt; &lt;ma_result&gt; &lt;total_count&gt;8&lt;/total_count&gt; &lt;filtered_count&gt;8&lt;/filtered_count&gt; &lt;word_list&gt; &lt;word&gt; &lt;surface&gt;庭&lt;/surface&gt; &lt;reading&gt;にわ&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;に&lt;/surface&gt; &lt;reading&gt;に&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;は&lt;/surface&gt; &lt;reading&gt;は&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;二羽&lt;/surface&gt; &lt;reading&gt;にわ&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;ニワトリ&lt;/surface&gt; &lt;reading&gt;にわとり&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;が&lt;/surface&gt; &lt;reading&gt;が&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;いる&lt;/surface&gt; &lt;reading&gt;いる&lt;/reading&gt; &lt;pos&gt;動詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;。&lt;/surface&gt; &lt;reading&gt;。&lt;/reading&gt; &lt;pos&gt;特殊&lt;/pos&gt; &lt;/word&gt; &lt;/word_list&gt; &lt;/ma_result&gt; &lt;uniq_result&gt; &lt;total_count&gt;8&lt;/total_count&gt; &lt;filtered_count&gt;4&lt;/filtered_count&gt; &lt;word_list&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;いる&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;動詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;ニワトリ&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;二羽&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;庭&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;/word_list&gt; &lt;/uniq_result&gt; &lt;/ResultSet&gt;  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tagty-blog.firebaseapp.com/posts/morphological-analysis-haskell/" />
+
+
+
+<meta property="article:published_time" content="2018-08-07T09:55:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2018-08-07T09:55:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Haskellで日本語形態素解析APIを使うにはどうすればよいか？">
+<meta itemprop="description" content=" ハッカーと画家のスパムへの対策に登場したベイジアンフィルタをHaskellで書きたいと思った。スパム判定のためには形態素解析が必要である。YAHOO!が日本語形態素解析APIを公開している。Haskellで日本語形態素解析APIを使うにはどうすればよいかを調べた。
+2.日本語形態素解析APIをHaskellで利用する ベイジアンフィルタを実装するために機械学習 はじめようの第3回ベイジアンフィルタを実装してみようを参考にすることにした。この記事では、形態素解析にYAHOO!デベロッパーネットワークの日本語形態素解析を利用している。HaskellでWeb APIを利用するには、HTTPのライブラリが必要である。ライブラリにはHTTP: A library for client-side HTTPを利用した。以下に実装を示す。
+import Network.HTTP.Conduit import qualified Data.ByteString.Lazy as L appid = APIID -- 9 : 名詞, 10 : 動詞 uniq_filter = &quot;9|10&quot; sentence = &quot;庭には二羽ニワトリがいる。&quot; apiUri = &quot;https://jlp.yahooapis.jp/MAService/V1/parse?appid=&quot; &#43;&#43; appid &#43;&#43; &quot;&amp;results=ma,uniq&amp;uniq_filter=&quot; &#43;&#43; uniq_filter &#43;&#43; &quot;&amp;sentence=&quot; &#43;&#43; sentence main :: IO () main = do simpleHttp apiUri &gt;&gt;= L.putStr  以下のレスポンスを得ることができた。
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;ResultSet xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;urn:yahoo:jp:jlp&quot; xsi:schemaLocation=&quot;urn:yahoo:jp:jlp https://jlp.yahooapis.jp/MAService/V1/parseResponse.xsd&quot;&gt; &lt;ma_result&gt; &lt;total_count&gt;8&lt;/total_count&gt; &lt;filtered_count&gt;8&lt;/filtered_count&gt; &lt;word_list&gt; &lt;word&gt; &lt;surface&gt;庭&lt;/surface&gt; &lt;reading&gt;にわ&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;に&lt;/surface&gt; &lt;reading&gt;に&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;は&lt;/surface&gt; &lt;reading&gt;は&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;二羽&lt;/surface&gt; &lt;reading&gt;にわ&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;ニワトリ&lt;/surface&gt; &lt;reading&gt;にわとり&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;が&lt;/surface&gt; &lt;reading&gt;が&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;いる&lt;/surface&gt; &lt;reading&gt;いる&lt;/reading&gt; &lt;pos&gt;動詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;。&lt;/surface&gt; &lt;reading&gt;。&lt;/reading&gt; &lt;pos&gt;特殊&lt;/pos&gt; &lt;/word&gt; &lt;/word_list&gt; &lt;/ma_result&gt; &lt;uniq_result&gt; &lt;total_count&gt;8&lt;/total_count&gt; &lt;filtered_count&gt;4&lt;/filtered_count&gt; &lt;word_list&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;いる&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;動詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;ニワトリ&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;二羽&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;庭&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;/word_list&gt; &lt;/uniq_result&gt; &lt;/ResultSet&gt;  ">
+
+
+<meta itemprop="datePublished" content="2018-08-07T09:55:00&#43;09:00" />
+<meta itemprop="dateModified" content="2018-08-07T09:55:00&#43;09:00" />
+<meta itemprop="wordCount" content="147">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Haskellで日本語形態素解析APIを使うにはどうすればよいか？"/>
+<meta name="twitter:description" content=" ハッカーと画家のスパムへの対策に登場したベイジアンフィルタをHaskellで書きたいと思った。スパム判定のためには形態素解析が必要である。YAHOO!が日本語形態素解析APIを公開している。Haskellで日本語形態素解析APIを使うにはどうすればよいかを調べた。
+2.日本語形態素解析APIをHaskellで利用する ベイジアンフィルタを実装するために機械学習 はじめようの第3回ベイジアンフィルタを実装してみようを参考にすることにした。この記事では、形態素解析にYAHOO!デベロッパーネットワークの日本語形態素解析を利用している。HaskellでWeb APIを利用するには、HTTPのライブラリが必要である。ライブラリにはHTTP: A library for client-side HTTPを利用した。以下に実装を示す。
+import Network.HTTP.Conduit import qualified Data.ByteString.Lazy as L appid = APIID -- 9 : 名詞, 10 : 動詞 uniq_filter = &quot;9|10&quot; sentence = &quot;庭には二羽ニワトリがいる。&quot; apiUri = &quot;https://jlp.yahooapis.jp/MAService/V1/parse?appid=&quot; &#43;&#43; appid &#43;&#43; &quot;&amp;results=ma,uniq&amp;uniq_filter=&quot; &#43;&#43; uniq_filter &#43;&#43; &quot;&amp;sentence=&quot; &#43;&#43; sentence main :: IO () main = do simpleHttp apiUri &gt;&gt;= L.putStr  以下のレスポンスを得ることができた。
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;ResultSet xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;urn:yahoo:jp:jlp&quot; xsi:schemaLocation=&quot;urn:yahoo:jp:jlp https://jlp.yahooapis.jp/MAService/V1/parseResponse.xsd&quot;&gt; &lt;ma_result&gt; &lt;total_count&gt;8&lt;/total_count&gt; &lt;filtered_count&gt;8&lt;/filtered_count&gt; &lt;word_list&gt; &lt;word&gt; &lt;surface&gt;庭&lt;/surface&gt; &lt;reading&gt;にわ&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;に&lt;/surface&gt; &lt;reading&gt;に&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;は&lt;/surface&gt; &lt;reading&gt;は&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;二羽&lt;/surface&gt; &lt;reading&gt;にわ&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;ニワトリ&lt;/surface&gt; &lt;reading&gt;にわとり&lt;/reading&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;が&lt;/surface&gt; &lt;reading&gt;が&lt;/reading&gt; &lt;pos&gt;助詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;いる&lt;/surface&gt; &lt;reading&gt;いる&lt;/reading&gt; &lt;pos&gt;動詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;surface&gt;。&lt;/surface&gt; &lt;reading&gt;。&lt;/reading&gt; &lt;pos&gt;特殊&lt;/pos&gt; &lt;/word&gt; &lt;/word_list&gt; &lt;/ma_result&gt; &lt;uniq_result&gt; &lt;total_count&gt;8&lt;/total_count&gt; &lt;filtered_count&gt;4&lt;/filtered_count&gt; &lt;word_list&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;いる&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;動詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;ニワトリ&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;二羽&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;word&gt; &lt;count&gt;1&lt;/count&gt; &lt;surface&gt;庭&lt;/surface&gt; &lt;reading /&gt; &lt;pos&gt;名詞&lt;/pos&gt; &lt;/word&gt; &lt;/word_list&gt; &lt;/uniq_result&gt; &lt;/ResultSet&gt;  "/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://tagty-blog.firebaseapp.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Tagty Blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Haskellで日本語形態素解析APIを使うにはどうすればよいか？</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-08-07T09:55:00&#43;09:00">August 7, 2018</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<p>ハッカーと画家のスパムへの対策に登場したベイジアンフィルタをHaskellで書きたいと思った。スパム判定のためには形態素解析が必要である。YAHOO!が日本語形態素解析APIを公開している。Haskellで日本語形態素解析APIを使うにはどうすればよいかを調べた。</p>
+
+<h1 id="2-日本語形態素解析apiをhaskellで利用する">2.日本語形態素解析APIをHaskellで利用する</h1>
+
+<p>ベイジアンフィルタを実装するために<a href="http://gihyo.jp/dev/serial/01/machine-learning">機械学習 はじめよう</a>の<a href="http://gihyo.jp/dev/serial/01/machine-learning/0003">第3回ベイジアンフィルタを実装してみよう</a>を参考にすることにした。この記事では、形態素解析にYAHOO!デベロッパーネットワークの<a href="https://developer.yahoo.co.jp/webapi/jlp/ma/v1/parse.html">日本語形態素解析</a>を利用している。HaskellでWeb APIを利用するには、HTTPのライブラリが必要である。ライブラリには<a href="http://hackage.haskell.org/package/HTTP">HTTP: A library for client-side HTTP</a>を利用した。以下に実装を示す。</p>
+
+<pre><code class="language-haskell">import Network.HTTP.Conduit
+import qualified Data.ByteString.Lazy as L
+
+appid = APIID
+-- 9 : 名詞, 10 : 動詞
+uniq_filter = &quot;9|10&quot;
+sentence = &quot;庭には二羽ニワトリがいる。&quot;
+apiUri = &quot;https://jlp.yahooapis.jp/MAService/V1/parse?appid=&quot; ++ appid ++ &quot;&amp;results=ma,uniq&amp;uniq_filter=&quot; ++ uniq_filter ++ &quot;&amp;sentence=&quot; ++ sentence
+
+main :: IO ()
+main = do
+    simpleHttp apiUri &gt;&gt;= L.putStr
+</code></pre>
+
+<p>以下のレスポンスを得ることができた。</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;ResultSet xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;urn:yahoo:jp:jlp&quot; xsi:schemaLocation=&quot;urn:yahoo:jp:jlp https://jlp.yahooapis.jp/MAService/V1/parseResponse.xsd&quot;&gt;
+  &lt;ma_result&gt;
+    &lt;total_count&gt;8&lt;/total_count&gt;
+    &lt;filtered_count&gt;8&lt;/filtered_count&gt;
+    &lt;word_list&gt;
+      &lt;word&gt;
+        &lt;surface&gt;庭&lt;/surface&gt;
+        &lt;reading&gt;にわ&lt;/reading&gt;
+        &lt;pos&gt;名詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;surface&gt;に&lt;/surface&gt;
+        &lt;reading&gt;に&lt;/reading&gt;
+        &lt;pos&gt;助詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;surface&gt;は&lt;/surface&gt;
+        &lt;reading&gt;は&lt;/reading&gt;
+        &lt;pos&gt;助詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;surface&gt;二羽&lt;/surface&gt;
+        &lt;reading&gt;にわ&lt;/reading&gt;
+        &lt;pos&gt;名詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;surface&gt;ニワトリ&lt;/surface&gt;
+        &lt;reading&gt;にわとり&lt;/reading&gt;
+        &lt;pos&gt;名詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;surface&gt;が&lt;/surface&gt;
+        &lt;reading&gt;が&lt;/reading&gt;
+        &lt;pos&gt;助詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;surface&gt;いる&lt;/surface&gt;
+        &lt;reading&gt;いる&lt;/reading&gt;
+        &lt;pos&gt;動詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;surface&gt;。&lt;/surface&gt;
+        &lt;reading&gt;。&lt;/reading&gt;
+        &lt;pos&gt;特殊&lt;/pos&gt;
+      &lt;/word&gt;
+    &lt;/word_list&gt;
+  &lt;/ma_result&gt;
+  &lt;uniq_result&gt;
+    &lt;total_count&gt;8&lt;/total_count&gt;
+    &lt;filtered_count&gt;4&lt;/filtered_count&gt;
+    &lt;word_list&gt;
+      &lt;word&gt;
+        &lt;count&gt;1&lt;/count&gt;
+        &lt;surface&gt;いる&lt;/surface&gt;
+        &lt;reading /&gt;
+        &lt;pos&gt;動詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;count&gt;1&lt;/count&gt;
+        &lt;surface&gt;ニワトリ&lt;/surface&gt;
+        &lt;reading /&gt;
+        &lt;pos&gt;名詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;count&gt;1&lt;/count&gt;
+        &lt;surface&gt;二羽&lt;/surface&gt;
+        &lt;reading /&gt;
+        &lt;pos&gt;名詞&lt;/pos&gt;
+      &lt;/word&gt;
+      &lt;word&gt;
+        &lt;count&gt;1&lt;/count&gt;
+        &lt;surface&gt;庭&lt;/surface&gt;
+        &lt;reading /&gt;
+        &lt;pos&gt;名詞&lt;/pos&gt;
+      &lt;/word&gt;
+    &lt;/word_list&gt;
+  &lt;/uniq_result&gt;
+&lt;/ResultSet&gt;
+</code></pre>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://tagty-blog.firebaseapp.com/" >
+    &copy; 2019 Tagty Blog
+  </a>
+  
+
+
+
+
+
+
+
+
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

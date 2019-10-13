@@ -1,6 +1,15 @@
 # Tagty Blog
 ## Commands
 ```
+# New
+$ hugo new posts/HOGE.md
+
+# Serve
+$ hugo server
+
 # Deploy
-$ hugo -D && firebase deploy
+$ hugo && firebase deploy
 ```
+
+## Todo
+- Top image

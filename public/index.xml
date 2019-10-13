@@ -6,18 +6,75 @@
     <description>Recent content on Tagty Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Aug 2018 20:22:03 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 12 Mar 2019 21:01:48 +0900</lastBuildDate>
     
 	<atom:link href="https://tagty-blog.firebaseapp.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>My First Post</title>
-      <link>https://tagty-blog.firebaseapp.com/posts/my-first-post/</link>
-      <pubDate>Sun, 05 Aug 2018 20:22:03 +0900</pubDate>
+      <title>Reformを使ってモデルをシンプルに保つ</title>
+      <link>https://tagty-blog.firebaseapp.com/posts/refactor-with-reform/</link>
+      <pubDate>Tue, 12 Mar 2019 21:01:48 +0900</pubDate>
       
-      <guid>https://tagty-blog.firebaseapp.com/posts/my-first-post/</guid>
-      <description></description>
+      <guid>https://tagty-blog.firebaseapp.com/posts/refactor-with-reform/</guid>
+      <description>複雑なフォームを扱っていると、モデルが複雑になってしまう場合があります。 そのような場合にどのような対処法があるでしょうか？
+フォームオブジェクトを導入する フォームオブジェクトを導入すると、モデルからフォームに関するコードを取り除くことができます。
+フォームオブジェクトを使わない場合 例えば、以下のようなアルバムの情報を編集するフォームがあるとします。
+アルバムのタイトルとアーティストの名前と曲のタイトルを設定できるフォームです。
+新規登録ページ
+詳細ページ
+アルバムのタイトルとアーティストの名前は必須項目になっています。
+クラス図
+accepts_nested_attributes_for を使えば、Albumモデルは以下のようなコードになります。
+app/models/album.rb
+class Album &amp;lt; ApplicationRecord has_one :artist has_many :songs validates :title, presence: true accepts_nested_attributes_for :artist, :songs end  モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。
+それを解決する方法の一つとして、フォームオブジェクトの導入があります。
+Reformを導入する 今回はフォームオブジェクトの導入にReformというgemを使います。
+変更はこのようになります。
+フォームオブジェクトは以下のように設定しています。
+app/forms/album_form.rb
+class AlbumForm &amp;lt; Reform::Form property :title validates :title, presence: true property :artist do property :name validates :name, presence: true end collection :songs do property :title end end  フォームオブジェクト導入後のAlbumモデルは以下のようになります。
+app/models/album.rb
+class Album &amp;lt; ApplicationRecord has_one :artist has_many :songs end  フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。</description>
+    </item>
+    
+    <item>
+      <title>本質的な問題や答えに気づいてもらえるには？</title>
+      <link>https://tagty-blog.firebaseapp.com/posts/client-centered-therapy/</link>
+      <pubDate>Mon, 17 Sep 2018 19:39:46 +0900</pubDate>
+      
+      <guid>https://tagty-blog.firebaseapp.com/posts/client-centered-therapy/</guid>
+      <description>どうすれば本質的な問題や答えに気づいてもらえるのだろうか？ 人に本質的な問題や答えに気づいてもらうことは難しい。 とくに困難に向き合っているときは視野が狭くなり、本質的な問題や答えに気づかない場合が多い。 どうすれば人に本質的な問題や答えに気づいてもらえるのだろうか？
+相手のプロセスを尊重する 本質的な問題や答えに気付いてもらうには相手のプロセスを尊重するとよい。 相手のプロセスを尊重するということは相手の自発的な思考や行動を尊重するということだ。 相手の自発的な思考や行動を尊重することで、相手が主体的に物事に気づくことができる。
+来談者中心療法 クライエントのプロセスを中心に考える方法として、新臨床心理学にはロジャースの診療の経験が紹介されている。
+ ロジャーズがまだ30代の頃に体験した、治療面接におけるあるエピソードを紹介しよう。乱暴者の少年をもつ知能の優れた母親との面接に取り組んでいたロジャーズは、問題は明らかに少年の幼児期に母親が彼を拒否したことにあると知りながら、何度面接を重ねても彼女にこのことを洞察させることができずにいた。ロジャーズは母親に、面接の中止を申し出、母親もそれに同意した。しかし面接を終えてドアへ歩きかけたこの母親は、くるりと振り返り、次のように言ったという。「先生は、ここで大人のカウンセリングをやられた事がありますか」。ロジャースがイエスと答えると、彼女は立ち去りかけた椅子に戻って、彼女の結婚生活、夫との関係などを以前とは違った感情のこもった仕方で語り始めた。セラピーは彼女にとっても息子にとっても大成功に終わったという。
+ロジャーズはこの経験から、「何がその人を傷つけているか、どの方向に行くべきか、何が重要な問題なのか」を知っているのはクライエント自身であること、したがってカウンセリングにおいては、クライエント自身の内部から自発的に生じてくるプロセスを徹底的に尊重すべきであることを学んだという。ロジャーズ自身「決定的な学習体験」と呼んでいるように、この体験は「来談者中心療法」の誕生を象徴するものとして知られている。
+ ロジャースはクライエント自身の内部から自発的に生じてくるプロセスを尊重することによって、クライエント自身が問題と答えを見出すことができることを示した。 上記の例では、ロジャースが面接の中止を申し出たあと、母親が自発的に自分自身のことを相談することを尊重し、母親が自分で問題と答えを見出している。 クライエント自身が問題と答えを見出すことで本人はその事実に十分に納得し、実際に行動に移すことができる。</description>
+    </item>
+    
+    <item>
+      <title>遺伝子編集が当たり前になった世界ではどうすればよいのか？</title>
+      <link>https://tagty-blog.firebaseapp.com/posts/gattaca/</link>
+      <pubDate>Thu, 30 Aug 2018 19:57:49 +0900</pubDate>
+      
+      <guid>https://tagty-blog.firebaseapp.com/posts/gattaca/</guid>
+      <description>近年、遺伝子編集の研究が盛んである。遺伝子編集が当たり前になる日も近いかもしれない。遺伝子編集が常識になった世界ではどのように生きていけばよいのか。
+遺伝子編集を安全に利用する まずは利用する側に立つことが重要である。安全に利用できれば人生を優位に進めることができる可能性が高い。人生が遺伝子によって決まる社会制度を持った世界が訪れるかもしれない。
+遺伝子編集が当たり前になった世界 GATTACAの世界 GATTACAは遺伝子操作により管理された近未来を描くSF映画である。この世界の人間の将来の多くは遺伝子の優劣によって決まってしまう。主人公は遺伝子編集されずに生まれる。
+遺伝子により人生が決まる世界 この世界では選択可能な職業も遺伝子で決まる。主人公は宇宙飛行士になる夢を持っているが、「不適正者」であった。主人公は夢を叶えるためにDNAブローカーの仲介で、下半身不随になった「適正者」のIDを入手する。「不適正者」として生まれた者は生まれた時点で選択可能な職業が決まってしまっている。社会は遺伝子の情報に頼り、遺伝子でわかることは自分たちで判断しなくなる。採用も遺伝子の情報に頼ることになる。
+まとめ 以上のように遺伝子編集が実用化された世界では、遺伝子の情報をもとに人生が決まる可能性がある。遺伝子編集が実用化されたときに、安全性が確保されているならば、積極的に活用することがよいと思われる。安全に活用できれば、人生を優位に進めることができるかもしれない。</description>
+    </item>
+    
+    <item>
+      <title>Haskellで日本語形態素解析APIを使うにはどうすればよいか？</title>
+      <link>https://tagty-blog.firebaseapp.com/posts/morphological-analysis-haskell/</link>
+      <pubDate>Tue, 07 Aug 2018 09:55:00 +0900</pubDate>
+      
+      <guid>https://tagty-blog.firebaseapp.com/posts/morphological-analysis-haskell/</guid>
+      <description> ハッカーと画家のスパムへの対策に登場したベイジアンフィルタをHaskellで書きたいと思った。スパム判定のためには形態素解析が必要である。YAHOO!が日本語形態素解析APIを公開している。Haskellで日本語形態素解析APIを使うにはどうすればよいかを調べた。
+2.日本語形態素解析APIをHaskellで利用する ベイジアンフィルタを実装するために機械学習 はじめようの第3回ベイジアンフィルタを実装してみようを参考にすることにした。この記事では、形態素解析にYAHOO!デベロッパーネットワークの日本語形態素解析を利用している。HaskellでWeb APIを利用するには、HTTPのライブラリが必要である。ライブラリにはHTTP: A library for client-side HTTPを利用した。以下に実装を示す。
+import Network.HTTP.Conduit import qualified Data.ByteString.Lazy as L appid = APIID -- 9 : 名詞, 10 : 動詞 uniq_filter = &amp;quot;9|10&amp;quot; sentence = &amp;quot;庭には二羽ニワトリがいる。&amp;quot; apiUri = &amp;quot;https://jlp.yahooapis.jp/MAService/V1/parse?appid=&amp;quot; ++ appid ++ &amp;quot;&amp;amp;results=ma,uniq&amp;amp;uniq_filter=&amp;quot; ++ uniq_filter ++ &amp;quot;&amp;amp;sentence=&amp;quot; ++ sentence main :: IO () main = do simpleHttp apiUri &amp;gt;&amp;gt;= L.putStr  以下のレスポンスを得ることができた。
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;ResultSet xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xmlns=&amp;quot;urn:yahoo:jp:jlp&amp;quot; xsi:schemaLocation=&amp;quot;urn:yahoo:jp:jlp https://jlp.yahooapis.jp/MAService/V1/parseResponse.xsd&amp;quot;&amp;gt; &amp;lt;ma_result&amp;gt; &amp;lt;total_count&amp;gt;8&amp;lt;/total_count&amp;gt; &amp;lt;filtered_count&amp;gt;8&amp;lt;/filtered_count&amp;gt; &amp;lt;word_list&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;庭&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;にわ&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;名詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;に&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;に&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;助詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;は&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;は&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;助詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;二羽&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;にわ&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;名詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;ニワトリ&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;にわとり&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;名詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;が&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;が&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;助詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;いる&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;いる&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;動詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;surface&amp;gt;。&amp;lt;/surface&amp;gt; &amp;lt;reading&amp;gt;。&amp;lt;/reading&amp;gt; &amp;lt;pos&amp;gt;特殊&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;/word_list&amp;gt; &amp;lt;/ma_result&amp;gt; &amp;lt;uniq_result&amp;gt; &amp;lt;total_count&amp;gt;8&amp;lt;/total_count&amp;gt; &amp;lt;filtered_count&amp;gt;4&amp;lt;/filtered_count&amp;gt; &amp;lt;word_list&amp;gt; &amp;lt;word&amp;gt; &amp;lt;count&amp;gt;1&amp;lt;/count&amp;gt; &amp;lt;surface&amp;gt;いる&amp;lt;/surface&amp;gt; &amp;lt;reading /&amp;gt; &amp;lt;pos&amp;gt;動詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;count&amp;gt;1&amp;lt;/count&amp;gt; &amp;lt;surface&amp;gt;ニワトリ&amp;lt;/surface&amp;gt; &amp;lt;reading /&amp;gt; &amp;lt;pos&amp;gt;名詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;count&amp;gt;1&amp;lt;/count&amp;gt; &amp;lt;surface&amp;gt;二羽&amp;lt;/surface&amp;gt; &amp;lt;reading /&amp;gt; &amp;lt;pos&amp;gt;名詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;word&amp;gt; &amp;lt;count&amp;gt;1&amp;lt;/count&amp;gt; &amp;lt;surface&amp;gt;庭&amp;lt;/surface&amp;gt; &amp;lt;reading /&amp;gt; &amp;lt;pos&amp;gt;名詞&amp;lt;/pos&amp;gt; &amp;lt;/word&amp;gt; &amp;lt;/word_list&amp;gt; &amp;lt;/uniq_result&amp;gt; &amp;lt;/ResultSet&amp;gt;  </description>
     </item>
     
   </channel>
