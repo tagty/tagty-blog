@@ -3,7 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://tagty-blog.firebaseapp.com/posts/</loc>
+    <lastmod>2019-03-12T21:01:48+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://tagty-blog.firebaseapp.com/posts/refactor-with-reform/</loc>
+    <lastmod>2019-03-12T21:01:48+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/</loc>
     <lastmod>2019-03-12T21:01:48+09:00</lastmod>
   </url>
   
@@ -24,24 +34,10 @@
   
   <url>
     <loc>https://tagty-blog.firebaseapp.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tagty-blog.firebaseapp.com/posts/</loc>
-    <lastmod>2019-03-12T21:01:48+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tagty-blog.firebaseapp.com/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tagty-blog.firebaseapp.com/</loc>
-    <lastmod>2019-03-12T21:01:48+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>
