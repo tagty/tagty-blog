@@ -3,13 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://tagty-blog.firebaseapp.com/posts/</loc>
-    <lastmod>2019-10-15T13:37:00+09:00</lastmod>
+    <loc>https://tagty-blog.firebaseapp.com/posts/review-202003/</loc>
+    <lastmod>2020-04-02T07:57:58+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://tagty-blog.firebaseapp.com/</loc>
-    <lastmod>2019-10-15T13:37:00+09:00</lastmod>
+    <loc>https://tagty-blog.firebaseapp.com/posts/how-to-produce-results/</loc>
+    <lastmod>2020-03-29T16:38:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/posts/kannonyama-2020/</loc>
+    <lastmod>2020-02-27T07:31:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/posts/how-to-run-easily/</loc>
+    <lastmod>2020-02-18T07:38:59+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/posts/hitech-half-2020/</loc>
+    <lastmod>2020-01-13T21:21:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/posts/review-2019/</loc>
+    <lastmod>2020-01-13T17:52:06+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/posts/mitakesan-trailrun-20/</loc>
+    <lastmod>2019-12-10T07:55:32+09:00</lastmod>
   </url>
   
   <url>
@@ -44,10 +69,24 @@
   
   <url>
     <loc>https://tagty-blog.firebaseapp.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/posts/</loc>
+    <lastmod>2020-04-02T07:57:58+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tagty-blog.firebaseapp.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tagty-blog.firebaseapp.com/</loc>
+    <lastmod>2020-04-02T07:57:58+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

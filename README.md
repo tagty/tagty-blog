@@ -15,4 +15,5 @@ $ hugo && firebase deploy
 
 ## Todo
 
+- Font
 - Top image
