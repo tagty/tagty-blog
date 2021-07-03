@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.73.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -39,34 +39,19 @@
 クラス図
 accepts_nested_attributes_for を使えば、Albumモデルは以下のようなコードになります。
 app/models/album.rb
-class Album &lt; ApplicationRecord has_one :artist has_many :songs validates :title, presence: true accepts_nested_attributes_for :artist, :songs end  モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。
+class Album &lt; ApplicationRecord has_one :artist has_many :songs validates :title, presence: true accepts_nested_attributes_for :artist, :songs end モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。
 それを解決する方法の一つとして、フォームオブジェクトの導入があります。
 Reformを導入する 今回はフォームオブジェクトの導入にReformというgemを使います。
 変更はこのようになります。
 フォームオブジェクトは以下のように設定しています。
 app/forms/album_form.rb
-class AlbumForm &lt; Reform::Form property :title validates :title, presence: true property :artist do property :name validates :name, presence: true end collection :songs do property :title end end  フォームオブジェクト導入後のAlbumモデルは以下のようになります。
+class AlbumForm &lt; Reform::Form property :title validates :title, presence: true property :artist do property :name validates :name, presence: true end collection :songs do property :title end end フォームオブジェクト導入後のAlbumモデルは以下のようになります。
 app/models/album.rb
-class Album &lt; ApplicationRecord has_one :artist has_many :songs end  フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。" />
+class Album &lt; ApplicationRecord has_one :artist has_many :songs end フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tagty-blog.firebaseapp.com/posts/refactor-with-reform/" />
-
-
-
-<meta property="article:published_time" content="2019-03-12T21:01:48&#43;09:00"/>
-
-<meta property="article:modified_time" content="2019-03-12T21:01:48&#43;09:00"/>
-
-
-
-
-
-
-
-
-
-
-
+<meta property="article:published_time" content="2019-03-12T21:01:48+09:00" />
+<meta property="article:modified_time" content="2019-03-12T21:01:48+09:00" />
 <meta itemprop="name" content="Reformを使ってモデルをシンプルに保つ">
 <meta itemprop="description" content="複雑なフォームを扱っていると、モデルが複雑になってしまう場合があります。 そのような場合にどのような対処法があるでしょうか？
 フォームオブジェクトを導入する フォームオブジェクトを導入すると、モデルからフォームに関するコードを取り除くことができます。
@@ -78,25 +63,22 @@ class Album &lt; ApplicationRecord has_one :artist has_many :songs end  フォ�
 クラス図
 accepts_nested_attributes_for を使えば、Albumモデルは以下のようなコードになります。
 app/models/album.rb
-class Album &lt; ApplicationRecord has_one :artist has_many :songs validates :title, presence: true accepts_nested_attributes_for :artist, :songs end  モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。
+class Album &lt; ApplicationRecord has_one :artist has_many :songs validates :title, presence: true accepts_nested_attributes_for :artist, :songs end モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。
 それを解決する方法の一つとして、フォームオブジェクトの導入があります。
 Reformを導入する 今回はフォームオブジェクトの導入にReformというgemを使います。
 変更はこのようになります。
 フォームオブジェクトは以下のように設定しています。
 app/forms/album_form.rb
-class AlbumForm &lt; Reform::Form property :title validates :title, presence: true property :artist do property :name validates :name, presence: true end collection :songs do property :title end end  フォームオブジェクト導入後のAlbumモデルは以下のようになります。
+class AlbumForm &lt; Reform::Form property :title validates :title, presence: true property :artist do property :name validates :name, presence: true end collection :songs do property :title end end フォームオブジェクト導入後のAlbumモデルは以下のようになります。
 app/models/album.rb
-class Album &lt; ApplicationRecord has_one :artist has_many :songs end  フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。">
-
-
+class Album &lt; ApplicationRecord has_one :artist has_many :songs end フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。">
 <meta itemprop="datePublished" content="2019-03-12T21:01:48&#43;09:00" />
 <meta itemprop="dateModified" content="2019-03-12T21:01:48&#43;09:00" />
 <meta itemprop="wordCount" content="76">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Reformを使ってモデルをシンプルに保つ"/>
 <meta name="twitter:description" content="複雑なフォームを扱っていると、モデルが複雑になってしまう場合があります。 そのような場合にどのような対処法があるでしょうか？
 フォームオブジェクトを導入する フォームオブジェクトを導入すると、モデルからフォームに関するコードを取り除くことができます。
@@ -108,15 +90,15 @@ class Album &lt; ApplicationRecord has_one :artist has_many :songs end  フォ�
 クラス図
 accepts_nested_attributes_for を使えば、Albumモデルは以下のようなコードになります。
 app/models/album.rb
-class Album &lt; ApplicationRecord has_one :artist has_many :songs validates :title, presence: true accepts_nested_attributes_for :artist, :songs end  モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。
+class Album &lt; ApplicationRecord has_one :artist has_many :songs validates :title, presence: true accepts_nested_attributes_for :artist, :songs end モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。
 それを解決する方法の一つとして、フォームオブジェクトの導入があります。
 Reformを導入する 今回はフォームオブジェクトの導入にReformというgemを使います。
 変更はこのようになります。
 フォームオブジェクトは以下のように設定しています。
 app/forms/album_form.rb
-class AlbumForm &lt; Reform::Form property :title validates :title, presence: true property :artist do property :name validates :name, presence: true end collection :songs do property :title end end  フォームオブジェクト導入後のAlbumモデルは以下のようになります。
+class AlbumForm &lt; Reform::Form property :title validates :title, presence: true property :artist do property :name validates :name, presence: true end collection :songs do property :title end end フォームオブジェクト導入後のAlbumモデルは以下のようになります。
 app/models/album.rb
-class Album &lt; ApplicationRecord has_one :artist has_many :songs end  フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。"/>
+class Album &lt; ApplicationRecord has_one :artist has_many :songs end フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。"/>
 
   </head>
 
@@ -167,90 +149,57 @@ class Album &lt; ApplicationRecord has_one :artist has_many :songs end  フォ�
       <time class="f6 mv4 dib tracked" datetime="2019-03-12T21:01:48&#43;09:00">March 12, 2019</time>
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
-
-<p>複雑なフォームを扱っていると、モデルが複雑になってしまう場合があります。
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>複雑なフォームを扱っていると、モデルが複雑になってしまう場合があります。
 そのような場合にどのような対処法があるでしょうか？</p>
-
 <h2 id="フォームオブジェクトを導入する">フォームオブジェクトを導入する</h2>
-
 <p>フォームオブジェクトを導入すると、モデルからフォームに関するコードを取り除くことができます。</p>
-
 <h2 id="フォームオブジェクトを使わない場合">フォームオブジェクトを使わない場合</h2>
-
 <p>例えば、以下のようなアルバムの情報を編集するフォームがあるとします。</p>
-
 <p>アルバムのタイトルとアーティストの名前と曲のタイトルを設定できるフォームです。</p>
-
 <p><em>新規登録ページ</em></p>
-
-<p><img src="/images/refactor_with_reform/new.png" alt="new" /></p>
-
+<p><img src="/images/refactor_with_reform/new.png" alt="new"></p>
 <p><em>詳細ページ</em></p>
-
-<p><img src="/images/refactor_with_reform/show.png" alt="show" /></p>
-
+<p><img src="/images/refactor_with_reform/show.png" alt="show"></p>
 <p>アルバムのタイトルとアーティストの名前は必須項目になっています。</p>
-
-<p><img src="/images/refactor_with_reform/validation.png" alt="validation" /></p>
-
+<p><img src="/images/refactor_with_reform/validation.png" alt="validation"></p>
 <p><em>クラス図</em></p>
-
-<p><img src="/images/refactor_with_reform/class.png" alt="class" /></p>
-
+<p><img src="/images/refactor_with_reform/class.png" alt="class"></p>
 <p><code>accepts_nested_attributes_for</code> を使えば、Albumモデルは以下のようなコードになります。</p>
-
 <p>app/models/album.rb</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Album</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationRecord</span>
+  has_one <span style="color:#e6db74">:artist</span>
+  has_many <span style="color:#e6db74">:songs</span>
 
-<pre><code class="language-ruby">class Album &lt; ApplicationRecord
-  has_one :artist
-  has_many :songs
-
-  validates :title, presence: true
-  accepts_nested_attributes_for :artist, :songs
-end
-</code></pre>
-
-<p>モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。</p>
-
+  validates <span style="color:#e6db74">:title</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
+  accepts_nested_attributes_for <span style="color:#e6db74">:artist</span>, <span style="color:#e6db74">:songs</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>モデルのコードは、ネストするクラスが増えたり、バリデーションの条件が増えたりすると複雑になっていきます。</p>
 <p>それを解決する方法の一つとして、フォームオブジェクトの導入があります。</p>
-
 <h2 id="reformを導入する">Reformを導入する</h2>
-
 <p>今回はフォームオブジェクトの導入に<a href="http://trailblazer.to/gems/reform/">Reform</a>というgemを使います。</p>
-
 <p>変更は<a href="https://github.com/tagty/reform_sample/commit/eafed5366f71f557a0113d6f5a4f79b679820274">このように</a>なります。</p>
-
 <p>フォームオブジェクトは以下のように設定しています。</p>
-
 <p>app/forms/album_form.rb</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AlbumForm</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">Reform</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Form</span>
+  property <span style="color:#e6db74">:title</span>
+  validates <span style="color:#e6db74">:title</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
 
-<pre><code class="language-ruby">class AlbumForm &lt; Reform::Form
-  property :title
-  validates :title, presence: true
+  property <span style="color:#e6db74">:artist</span> <span style="color:#66d9ef">do</span>
+    property <span style="color:#e6db74">:name</span>
+    validates <span style="color:#e6db74">:name</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#66d9ef">end</span>
 
-  property :artist do
-    property :name
-    validates :name, presence: true
-  end
-
-  collection :songs do
-    property :title
-  end
-end
-</code></pre>
-
-<p>フォームオブジェクト導入後のAlbumモデルは以下のようになります。</p>
-
+  collection <span style="color:#e6db74">:songs</span> <span style="color:#66d9ef">do</span>
+    property <span style="color:#e6db74">:title</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>フォームオブジェクト導入後のAlbumモデルは以下のようになります。</p>
 <p>app/models/album.rb</p>
-
-<pre><code class="language-ruby">class Album &lt; ApplicationRecord
-  has_one :artist
-  has_many :songs
-end
-</code></pre>
-
-<p>フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Album</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationRecord</span>
+  has_one <span style="color:#e6db74">:artist</span>
+  has_many <span style="color:#e6db74">:songs</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>フォームオブジェクトを導入することによって、モデルをシンプルに保つことができました。</p>
 <ul class="pa0">
   
 </ul>
@@ -272,7 +221,7 @@ end
     <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://tagty-blog.firebaseapp.com/" >
-    &copy; 2020 Tagty Blog
+    &copy; 2021 Tagty Blog
   </a>
   
 
