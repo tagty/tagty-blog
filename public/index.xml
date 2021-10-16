@@ -6,10 +6,19 @@
     <description>Recent content on Tagty Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Jul 2021 16:32:19 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 16 Oct 2021 16:54:49 +0900</lastBuildDate>
     
 	<atom:link href="https://tagty-blog.firebaseapp.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2021/07 - 2021/09 を振り返って</title>
+      <link>https://tagty-blog.firebaseapp.com/posts/review-202109/</link>
+      <pubDate>Sat, 16 Oct 2021 16:54:49 +0900</pubDate>
+      
+      <guid>https://tagty-blog.firebaseapp.com/posts/review-202109/</guid>
+      <description>仕事  Rocketsの経営会議に参加している 業務委託だが、開発チームのメンバーが増えた ProductはSTEP3に移行した  エンジニア  ISUCONに参加した 結果は失格だった  スポーツ  千葉シティトライアスロンに向けたの準備をした  資産  予算は達成した 株価が不安定だったので、ポートフォリオの見直しはしなかった  </description>
+    </item>
     
     <item>
       <title>2021/04 - 2021/06 を振り返って</title>
