@@ -6,10 +6,28 @@
     <description>Recent content on Tagty Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Oct 2021 16:54:49 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jan 2022 14:25:08 +0900</lastBuildDate>
     
 	<atom:link href="https://tagty-blog.firebaseapp.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2021 を振り返って</title>
+      <link>https://tagty-blog.firebaseapp.com/posts/review-2021/</link>
+      <pubDate>Sat, 01 Jan 2022 14:25:08 +0900</pubDate>
+      
+      <guid>https://tagty-blog.firebaseapp.com/posts/review-2021/</guid>
+      <description>仕事  2020年の7月からRocketsで働いているので、1年6ヶ月働いていることになる 1年間で、PRELEAD、GARAGE、for Professional、インサイドセールスの開発を行った 2020年と比べて開発メンバーが増え、自分で開発をすることはほとんどなくなった 設計の精度やレビューの効率が向上した チームとしての取り組みもはじめた 1on1や社内勉強会をはじめた 週次ミーティングを少しずつ改善している 月例の経営会議に参加するようになった  エンジニア  ApolloClientの記事を書いた アプリケーションの開発により、Blitz.jsやPrismaを習得した ISUCONに参加した インフラの設定ミスで失格してしまった  スポーツ  プールに通いはじめた 水泳、バイク、ランニングをバランスよく練習できるようになった 千葉シティトライアスロンに出場した 約2年ぶりの出場だった 結果はあまり良くなかった  資産  ポートフォリオの見直しを行った  </description>
+    </item>
+    
+    <item>
+      <title>2021/10 - 2021/12 を振り返って</title>
+      <link>https://tagty-blog.firebaseapp.com/posts/review-202112/</link>
+      <pubDate>Sat, 01 Jan 2022 13:37:13 +0900</pubDate>
+      
+      <guid>https://tagty-blog.firebaseapp.com/posts/review-202112/</guid>
+      <description>仕事  インサイドセールスの開発をしている 複雑な仕組みを作り上げている  エンジニア  社内勉強会で統計の発表をした 統計のnoteを書いた  スポーツ  千葉シティトライアスロンに出場した 結果はあまり良くなかった noteを書いた  資産  ポートフォリオの見直しを行った お金を使いすぎた 目標に対してマイナス5万円くらいで着地した  </description>
+    </item>
     
     <item>
       <title>2021/07 - 2021/09 を振り返って</title>
